@@ -15,8 +15,8 @@ class ClientRunner
       begin
         api_client.send(request_type, payload)
       rescue
-        # Retry request 3 times if request fails.
-        3.times { api_client.send(request_type, payload) }
+        # Retry request 1 time if request fails.
+        1.times { sleep 1, api_client.send(request_type, payload) }
       end
     end
 end
