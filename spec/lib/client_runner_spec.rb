@@ -1,7 +1,7 @@
 describe ClientRunner do
 
   before do
-    TwitterApiClient.set_token_preparer(OauthTokenPreparer)
+    TwitterApiClient.set_token_preparer(OauthAccessTokenPreparer)
     @client_runner = ClientRunner
     @api_client = TwitterApiClient.new
   end
@@ -11,7 +11,6 @@ describe ClientRunner do
       command_line_input = 'realdonaldtrump'
       expect { @client_runner.run_request(@api_client, 'get', command_line_input) }.
         to output.to_stdout
-        # NOT SURE HOW TO TEST WHAT EXACTLY THE OUTPUT IS.  
     end
   end
 

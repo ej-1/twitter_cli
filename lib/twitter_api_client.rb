@@ -1,18 +1,13 @@
-require 'oauth'
 require 'pry'
 require 'json'
-require './lib/oauth_token_preparer.rb'
-
-# WHAT IF I WANT TO ADD OPTIONS
-# CHANGE THIS
-# TwitterApiClient = Class.new(StandardError)
+require './lib/oauth_access_token_preparer.rb'
 
 class TwitterApiClient
-  include OauthTokenPreparer
+  include OauthAccessTokenPreparer
 
   BASE_URI = 'https://api.twitter.com/1.1'
 
-  @@token_preparer = OauthTokenPreparer
+  @@token_preparer = OauthAccessTokenPreparer
 
   def get(twitter_user_name)
     handle_timeouts do
@@ -36,17 +31,11 @@ class TwitterApiClient
     end
 
     def access_token
-      @@token_preparer.prepare_access_token(ENV['OAUTH_TOKEN'],
-        ENV['OAUTH_TOKEN_SECRET'])
+      @@token_preparer.prepare_access_token()
     end
 
     def url(twitter_user_name)
       "#{ BASE_URI }#{ path(twitter_user_name) }"
-    end
-
-    def api_key
-      raise TwitterApiClient.new('missing API key') if ENV['TWITTER_API_KEY'].nil?
-      ENV['TWITTER_API_KEY']
     end
 
     def path(twitter_user_name)
