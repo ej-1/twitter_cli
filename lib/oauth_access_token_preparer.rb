@@ -11,7 +11,7 @@ module OauthAccessTokenPreparer
 
   def self.prepare_access_token(oauth_token = nil, oauth_token_secret = nil)
     consumer = OAuth::Consumer
-                .new(ENV['API_KEY'], ENV['API_SECRET'],
+                .new(api_key, api_secret,
                   { site: @url,
                     scheme: :header })
 
@@ -30,4 +30,6 @@ module OauthAccessTokenPreparer
     raise 'missing API_SECRET' if ENV['API_SECRET'].nil?
     ENV['API_SECRET']
   end
+
+    private_class_method :api_key, :api_secret
 end
