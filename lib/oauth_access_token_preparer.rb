@@ -1,8 +1,7 @@
 require 'oauth'
 require 'pry'
 require 'json'
-# Documentation
-# https://developer.twitter.com/en/docs/basics/authentication/guides/single-user
+
 module OauthAccessTokenPreparer
 
   def self.assign_url(url)

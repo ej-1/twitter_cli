@@ -3,11 +3,8 @@ require 'json'
 require './lib/oauth_access_token_preparer.rb'
 
 class TwitterApiClient
-  include OauthAccessTokenPreparer
 
   BASE_URI = 'https://api.twitter.com/1.1'.freeze
-
-  @@token_preparer = OauthAccessTokenPreparer
 
   def get(twitter_user_name, count)
     handle_timeouts do

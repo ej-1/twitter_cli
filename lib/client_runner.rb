@@ -1,7 +1,7 @@
 class ClientRunner
 
   def self.run_request(api_client, request_type, payload, count) # maybe change name of payload
-    if payload || payload.is_a?(String)
+    if payload && payload.is_a?(String)
       response = send_request(api_client, request_type, payload, count)
       puts response
     else
