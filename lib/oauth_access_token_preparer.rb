@@ -16,7 +16,7 @@ module OauthAccessTokenPreparer
 
     token_hash = { oauth_token: oauth_token,
                    oauth_token_secret: oauth_token_secret }
-    # access_token
+
     OAuth::AccessToken.from_hash(consumer, token_hash)
   end
 
@@ -30,5 +30,5 @@ module OauthAccessTokenPreparer
     ENV['API_SECRET']
   end
 
-    private_class_method :api_key, :api_secret
+  private_class_method :api_key, :api_secret
 end

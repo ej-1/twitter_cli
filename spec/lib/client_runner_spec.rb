@@ -19,7 +19,7 @@ describe ClientRunner do
       command_line_input = 'SOMEINVALIDUSERNAME'
       expect { @client_runner.run_request(@api_client,
         'get', command_line_input, 5) }.to output("ERROR: No tweets found for this user name!\n").
-          to_stdout
+        to_stdout
     end
   end
 end
