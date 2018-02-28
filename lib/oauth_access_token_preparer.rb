@@ -4,28 +4,22 @@ require 'json'
 # Documentation
 # https://developer.twitter.com/en/docs/basics/authentication/guides/single-user
 module OauthAccessTokenPreparer
-  @@url = ''
 
-  def self.set_url(url)
-    @@url = url
+  def self.assign_url(url)
+    @url = url
   end
 
-  def self.prepare_access_token(oauth_token=nil, oauth_token_secret=nil)
+  def self.prepare_access_token(oauth_token = nil, oauth_token_secret = nil)
+    consumer = OAuth::Consumer
+                .new(ENV['API_KEY'], ENV['API_SECRET'],
+                  { site: @url,
+                    scheme: :header })
 
-    consumer = OAuth::Consumer.
-      new(ENV['API_KEY'], ENV['API_SECRET'],
-        { :site => @@url,
-          :scheme => :header })
-
-    token_hash = { :oauth_token => oauth_token,
-                   :oauth_token_secret => oauth_token_secret }
-
-    access_token = OAuth::AccessToken.from_hash(consumer, token_hash )
-
-    return access_token
+    token_hash = { oauth_token: oauth_token,
+                   oauth_token_secret: oauth_token_secret }
+    # access_token
+    OAuth::AccessToken.from_hash(consumer, token_hash)
   end
-
-  private
 
   def self.api_key
     raise 'missing API_KEY' if ENV['API_KEY'].nil?
