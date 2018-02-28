@@ -1,8 +1,8 @@
 class ClientRunner
 
-  def self.run_request(api_client, request_type, payload) # maybe change name of payload
+  def self.run_request(api_client, request_type, payload, count) # maybe change name of payload
     if payload || payload.is_a?(String)
-      response = self.send_request(api_client, request_type, payload)
+      response = self.send_request(api_client, request_type, payload, count)
       puts response
     else
       puts 'you need to input twitter user name.'
@@ -11,12 +11,12 @@ class ClientRunner
 
   private
 
-    def self.send_request(api_client, request_type, payload)
+    def self.send_request(api_client, request_type, payload, count)
       begin
-        api_client.send(request_type, payload)
+        api_client.send(request_type, payload, count)
       rescue
         # Retry request 1 time if request fails.
-        1.times { sleep 1, api_client.send(request_type, payload) }
+        1.times { sleep 1, api_client.send(request_type, payload, count) }
       end
     end
 end
