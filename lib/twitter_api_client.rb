@@ -24,13 +24,18 @@ class TwitterApiClient
 
   def handle_response(response)
     if response.code == '200'
-      print_tweets(response)
+      tweets = formatted_tweets(response)
+      if tweets.empty?
+        'ERROR: No tweets found for this user name!'
+      else
+        tweets
+      end
     else
       JSON.parse(response.body)
     end
   end
 
-  def print_tweets(response)
+  def formatted_tweets(response)
     parse_tweets(response).map do |tweet|
       tweet.map { |k, v| "#{k}: #{v}" }
     end
