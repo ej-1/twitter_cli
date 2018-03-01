@@ -1,5 +1,4 @@
 require 'oauth'
-require 'pry'
 require 'json'
 
 module OauthAccessTokenPreparer

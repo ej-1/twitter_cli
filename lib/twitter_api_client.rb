@@ -1,4 +1,3 @@
-require 'pry'
 require 'json'
 require './lib/oauth_access_token_preparer.rb'
 
